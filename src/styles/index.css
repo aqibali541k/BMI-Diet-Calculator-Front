@@ -1,0 +1,6 @@
+.d-container {
+  @apply md:max-w-[80%] max-w-[95%] w-full mx-auto;
+}
+.auth-input {
+  @apply p-2 rounded border w-full outline-0 focus:outline-0 my-2;
+}

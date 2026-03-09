@@ -1,0 +1,19 @@
+.btn {
+  @apply px-5 py-2 hover:brightness-90 transition-all duration-300 cursor-pointer rounded select-none;
+}
+
+.btn-primary {
+  @apply bg-[#1C352D];
+}
+.btn-secondary {
+  @apply bg-[#A6B28B];
+}
+.btn-accent {
+  @apply bg-[#F5C9B0];
+}
+.btn-light {
+  @apply bg-[#F9F6F3];
+}
+.btn-danger {
+  @apply bg-red-600;
+}

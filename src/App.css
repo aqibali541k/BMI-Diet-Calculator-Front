@@ -1,0 +1,10 @@
+@import "tailwindcss";
+
+/* Self made utilities */
+@import "./styles/index.css";
+
+/* Colors */
+@import "./styles/colors.css";
+
+/* Buttons */
+@import "./styles/button.css";

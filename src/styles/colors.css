@@ -1,0 +1,43 @@
+/* Background Colors */
+
+.bg-primary {
+  @apply bg-[#1C352D];
+}
+
+.bg-secondary {
+  @apply bg-[#A6B28B];
+}
+
+.bg-accent {
+  @apply bg-[#F5C9B0];
+}
+
+.bg-light {
+  @apply bg-[#F9F6F3];
+}
+
+.bg-danger {
+  @apply bg-red-600;
+}
+
+/* Text Colors */
+
+.text-primary {
+  @apply text-[#1C352D];
+}
+
+.text-secondary {
+  @apply text-[#A6B28B];
+}
+
+.text-accent {
+  @apply text-[#F5C9B0];
+}
+
+.text-light {
+  @apply text-[#F9F6F3];
+}
+
+.text-danger {
+  @apply text-red-600;
+}
