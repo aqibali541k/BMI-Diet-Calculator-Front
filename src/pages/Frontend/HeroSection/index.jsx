@@ -2,8 +2,10 @@ import React from "react";
 import HeroImg from "../../../assets/Images/hero.jpg";
 import { LuCalculator } from "react-icons/lu";
 import { BiSolidArrowFromLeft } from "react-icons/bi";
+import { Navigate, useNavigate } from "react-router-dom";
 
 const HeroSection = () => {
+    const navigate = useNavigate()
     return (
         <section
             className="min-h-screen bg-cover bg-center flex items-center justify-center text-white relative px-4"
@@ -32,8 +34,9 @@ const HeroSection = () => {
 
                     {/* Button 1 */}
                     <button
+                        onClick={() => navigate("/bmi")}
                         className="flex items-center gap-3 font-bold text-lg px-6 py-3 rounded-xl cursor-pointer
-            bg-gradient-to-r from-green-700 to-green-500 
+            bg-linear-to-r from-green-700 to-green-500 
             text-white shadow-lg shadow-green-900/40
             hover:from-green-600 hover:to-green-400 
             hover:scale-105 hover:shadow-xl
@@ -45,6 +48,7 @@ const HeroSection = () => {
 
                     {/* Button 2 */}
                     <button
+                        onClick={() => navigate("/diet")}
                         className="flex items-center gap-3 bg-yellow-600 text-white cursor-pointer
             font-bold text-lg px-6 py-3 rounded-xl 
             shadow-lg shadow-yellow-700/40 

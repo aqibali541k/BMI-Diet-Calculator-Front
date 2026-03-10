@@ -2,9 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { message } from "antd";
 import axios from "axios";
+import { useAuthContext } from "../../../contexts/Auth/AuthContext";
 
-export default function Login() {
+function Login() {
   const navigate = useNavigate();
+  const { handleLogin } = useAuthContext();
+
 
   // Single state object
   const [state, setState] = useState({
@@ -32,13 +35,13 @@ export default function Login() {
 
     try {
       setLoading(true);
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, {
+      const res = await axios.post("http://localhost:8000/users/login", {
         email,
         password,
       });
 
       if (res.data.token) {
-        localStorage.setItem("authToken", res.data.token);
+        handleLogin(res.data.user, res.data.token);
         message.success("Login successful");
         navigate("/dashboard");
       } else {
@@ -122,3 +125,4 @@ export default function Login() {
     </div>
   );
 }
+export default Login;

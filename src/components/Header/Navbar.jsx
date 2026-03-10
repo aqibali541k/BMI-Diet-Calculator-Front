@@ -13,6 +13,7 @@ const Navbar = () => {
   const navigate = useNavigate();
   const { isAuth, handleLogout, user } = useAuthContext();
 
+
   const navLinkStyle = ({ isActive }) =>
     isActive
       ? "bg-green-600 text-white flex items-center gap-2 px-4 py-2 rounded-lg"
@@ -67,14 +68,14 @@ const Navbar = () => {
             </li>
           )}
 
-          {isAuth && user.role === "admin" && (
+          {/* {isAuth && user.role === "admin" && (
             <li>
-              <NavLink to="/admin-dashboard" className={navLinkStyle}>
+              <NavLink to="/dashboard" className={navLinkStyle}>
                 <LuLayoutDashboard />
                 Admin
               </NavLink>
             </li>
-          )}
+          )} */}
 
         </ul>
 
@@ -142,12 +143,12 @@ const Navbar = () => {
             </NavLink>
           )}
 
-          {isAuth && user.role === "admin" && (
+          {/* {isAuth && user.role === "admin" && (
             <NavLink to="/admin-dashboard" className={navLinkStyle}>
               <LuLayoutDashboard />
               Admin
             </NavLink>
-          )}
+          )} */}
 
           {isAuth ? (
             <button

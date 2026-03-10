@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import weight from "../../../assets/Images/weight.jpg";
 import { message } from "antd";
+import axios from "axios";
 
 const initialState = {
     height: "",
@@ -17,7 +18,7 @@ const Calculator = () => {
         setState({ ...state, [e.target.name]: e.target.value });
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
         if (!height || !weightKg) {
@@ -30,25 +31,39 @@ const Calculator = () => {
             return;
         }
 
-        const h = height / 100;
-        const result = weightKg / (h * h);
-        const final = result.toFixed(1);
+        try {
+            const token = localStorage.getItem("authToken");
+            if (!token) {
+                message.error("Please login first");
+                return;
+            }
 
-        let cat = "";
+            // Correct payload: backend expects 'weight'
+            const res = await axios.post(
+                "http://localhost:8000/bmi/create",
+                {
+                    height,
+                    weight: weightKg, // map weightKg → weight
+                },
+                {
+                    headers: {
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
 
-        if (result < 18.5) cat = "Underweight";
-        else if (result < 25) cat = "Normal Weight";
-        else if (result < 30) cat = "Overweight";
-        else cat = "Obese";
+            setState({
+                height,
+                weightKg,
+                bmi: res.data.bmi,
+                category: res.data.category,
+            });
 
-        setState({
-            height,
-            weightKg,
-            bmi: final,
-            category: cat,
-        });
-
-        message.success("BMI calculated successfully");
+            message.success("BMI calculated successfully");
+        } catch (err) {
+            console.error(err);
+            message.error(err.response?.data?.message || "Failed to calculate BMI");
+        }
     };
 
     const getProgress = () => {
@@ -56,35 +71,43 @@ const Calculator = () => {
         return ((Number(bmi) - 15) / 25) * 100;
     };
 
+    const getCat = () => {
+        if (!bmi) return "";
+        if (bmi < 18.5) return "Underweight";
+        else if (bmi < 25) return "Normal Weight";
+        else if (bmi < 30) return "Overweight";
+        else return "Obese";
+    };
+
     return (
         <section className="min-h-screen bg-linear-to-br from-emerald-50 to-blue-50 py-16">
             <div className="max-w-6xl mx-auto px-4">
-
                 <div className="grid lg:grid-cols-2 gap-8">
-
-                    {/* LEFT CARD */}
-                    <div className="bg-white rounded-2xl shadow p-8">
-
+                    <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-8">
                         <h2 className="text-lg font-semibold mb-6 flex items-center gap-2">
                             📟 Enter Your Details
                         </h2>
 
                         <form onSubmit={handleSubmit} className="space-y-6">
 
+                            {/* Measurement */}
                             <div>
                                 <p className="font-medium mb-2">Measurement System</p>
 
-                                <label className="flex gap-2">
-                                    <input type="radio" defaultChecked />
-                                    Metric (cm, kg)
-                                </label>
+                                <div className="space-y-1 text-sm">
+                                    <label className="flex items-center gap-2">
+                                        <input type="radio" checked readOnly />
+                                        Metric (cm, kg)
+                                    </label>
 
-                                <label className="flex gap-2 mt-1">
-                                    <input type="radio" />
-                                    Imperial (inches, lbs)
-                                </label>
+                                    <label className="flex items-center gap-2 text-gray-500">
+                                        <input type="radio" disabled />
+                                        Imperial (inches, lbs)
+                                    </label>
+                                </div>
                             </div>
 
+                            {/* Height */}
                             <div>
                                 <label className="block mb-2">Height (cm)</label>
 
@@ -93,11 +116,12 @@ const Calculator = () => {
                                     name="height"
                                     value={height}
                                     onChange={handleChange}
-                                    placeholder="e.g., 170"
-                                    className="w-full bg-gray-100 p-3 rounded-lg"
+                                    placeholder="170"
+                                    className="w-full bg-gray-100 p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500"
                                 />
                             </div>
 
+                            {/* Weight */}
                             <div>
                                 <label className="block mb-2">Weight (kg)</label>
 
@@ -106,46 +130,44 @@ const Calculator = () => {
                                     name="weightKg"
                                     value={weightKg}
                                     onChange={handleChange}
-                                    placeholder="e.g., 70"
-                                    className="w-full bg-gray-100 p-3 rounded-lg"
+                                    placeholder="70"
+                                    className="w-full bg-gray-100 p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500"
                                 />
                             </div>
 
+                            {/* Button */}
                             <button
                                 type="submit"
-                                className="w-full bg-emerald-600 text-white py-3 rounded-lg font-semibold hover:bg-emerald-700"
+                                className="w-full bg-emerald-600 text-white py-3 rounded-lg font-semibold hover:bg-emerald-700 transition"
                             >
                                 Calculate BMI
                             </button>
 
                         </form>
                     </div>
-
-                    <div className="bg-white rounded-2xl shadow p-8">
+                    <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-8">
 
                         <h2 className="text-lg font-semibold mb-6 flex items-center gap-2">
                             💓 Your Results
                         </h2>
 
                         {bmi ? (
-
                             <div>
 
-                                <h3 className="text-6xl font-bold text-emerald-600 text-center">
+                                {/* BMI VALUE */}
+                                <h3 className="text-6xl font-bold text-red-600 text-center">
                                     {bmi}
                                 </h3>
 
-                                <p className="text-center text-2xl text-emerald-600 mt-2">
-                                    {category}
+                                <p className="text-center text-xl text-red-600 mt-2">
+                                    {category || getCat()}
                                 </p>
 
-                                {/* BMI SCALE */}
-
+                                {/* SCALE */}
                                 <div className="mt-6">
-
                                     <p className="font-medium mb-2">BMI Scale</p>
 
-                                    <div className="relative h-4 rounded-full overflow-hidden bg-gradient-to-r from-blue-500 via-orange-400 to-red-500">
+                                    <div className="relative h-3 rounded-full overflow-hidden bg-linear-to-r from-blue-500 via-orange-400 to-red-500">
 
                                         <div
                                             className="absolute top-0 h-full w-1 bg-black"
@@ -154,74 +176,75 @@ const Calculator = () => {
 
                                     </div>
 
-                                    <div className="flex justify-between text-xs mt-2">
+                                    <div className="flex justify-between text-xs mt-2 text-gray-500">
                                         <span>15</span>
                                         <span>18.5</span>
                                         <span>25</span>
                                         <span>30</span>
                                         <span>40</span>
                                     </div>
-
                                 </div>
 
-                                {/* ADVICE BOX */}
-
-                                <div className="mt-6 border rounded-xl p-4 bg-gray-50">
-
-                                    <p className="font-medium">
-                                        Your BMI is in the healthy range.
+                                {/* INFO BOX */}
+                                <div className="mt-6 bg-gray-50 border rounded-lg p-4 text-sm text-gray-600">
+                                    <p className="font-medium mb-1">
+                                        Your BMI indicates {category || getCat().toLowerCase()}.
                                     </p>
 
-                                    <p className="text-gray-600 text-sm mt-1">
-                                        Great job! Maintain your healthy weight with balanced nutrition and regular physical activity.
+                                    <p>
+                                        Consult with healthcare professionals for a comprehensive weight
+                                        management plan tailored to your needs.
                                     </p>
-
                                 </div>
 
-                                {/* BMI CATEGORY */}
-
+                                {/* CATEGORIES */}
                                 <div className="mt-6">
 
-                                    <p className="font-semibold mb-2">BMI Categories</p>
+                                    <p className="font-medium mb-2">BMI Categories</p>
 
-                                    <div className="flex justify-between text-blue-600">
-                                        <span>Underweight</span>
-                                        <span>&lt; 18.5</span>
+                                    <div className="text-sm space-y-1">
+
+                                        <div className="flex justify-between text-blue-500">
+                                            <span>Underweight</span>
+                                            <span>{"< 18.5"}</span>
+                                        </div>
+
+                                        <div className="flex justify-between text-emerald-600">
+                                            <span>Normal weight</span>
+                                            <span>18.5 - 24.9</span>
+                                        </div>
+
+                                        <div className="flex justify-between text-orange-500">
+                                            <span>Overweight</span>
+                                            <span>25 - 29.9</span>
+                                        </div>
+
+                                        <div className="flex justify-between text-red-600">
+                                            <span>Obese</span>
+                                            <span>{"≥ 30"}</span>
+                                        </div>
+
                                     </div>
+                                </div>
 
-                                    <div className="flex justify-between text-green-600">
-                                        <span>Normal weight</span>
-                                        <span>18.5 - 24.9</span>
-                                    </div>
-
-                                    <div className="flex justify-between text-orange-500">
-                                        <span>Overweight</span>
-                                        <span>25 - 29.9</span>
-                                    </div>
-
-                                    <div className="flex justify-between text-red-500">
-                                        <span>Obese</span>
-                                        <span>≥ 30</span>
-                                    </div>
-
+                                {/* SUCCESS MESSAGE */}
+                                <div className="mt-6 bg-emerald-50 border border-emerald-200 text-emerald-700 p-3 rounded-lg text-sm">
+                                    ✓ This result has been saved to your dashboard
                                 </div>
 
                             </div>
-
                         ) : (
-
                             <p className="text-gray-500 text-center mt-20">
                                 Enter your height and weight to calculate your BMI
                             </p>
-
                         )}
+
                     </div>
                 </div>
+
                 {/* IMAGE SECTION */}
                 <div className="mt-16">
-
                     <div className="relative rounded-xl overflow-hidden shadow-lg">
-
                         <img
                             src={weight}
                             alt="Fitness"
@@ -235,21 +258,17 @@ const Calculator = () => {
                                 Understanding Your BMI
                             </h3>
 
-                            <p className="text-md text-white">
+                            <p className="text-md">
                                 BMI helps determine whether your weight is in a healthy range based on your height.
                                 Maintaining a healthy BMI can reduce the risk of many diseases and improve overall wellbeing.
                             </p>
-
                         </div>
-
-                        {/* </div> */}
-
                     </div>
                 </div>
-            </div>
-        </section >
-    );
 
+            </div>
+        </section>
+    );
 };
 
-export default Calculator;      
+export default Calculator;

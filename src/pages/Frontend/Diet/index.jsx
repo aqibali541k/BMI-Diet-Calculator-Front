@@ -170,7 +170,7 @@ function DietPlans() {
 
     return (
         <div className="min-h-screen bg-linear-to-br from-emerald-50 to-blue-50 py-12 px-4">
-            <div className="max-w-7xl mx-auto">
+            <div className="max-w-8xl lg:max-w-7xl md:max-w-6xl sm:max-w-5xl max-w-4xl mx-auto">
 
                 {/* Hero */}
                 <div className="text-center mb-12">
@@ -197,7 +197,7 @@ function DietPlans() {
                 </div>
 
                 {/* Selected Plan Details */}
-                <div className="max-w-6xl mx-auto bg-white p-8 rounded-xl shadow mb-12">
+                <div className="max-w-8xl lg:max-w-7xl md:max-w-6xl sm:max-w-5xl max-w-4xl mx-auto bg-white p-8 rounded-xl shadow mb-12">
                     <div className="flex justify-between items-start mb-6">
                         <div>
                             <h2 className="text-3xl font-semibold mb-2">{selectedPlan.title}</h2>
@@ -268,7 +268,7 @@ function DietPlans() {
                 </div>
 
                 {/* Nutrition Tips */}
-                <div className="max-w-6xl mx-auto mb-12">
+                <div className="max-w-8xl lg:max-w-7xl md:max-w-6xl sm:max-w-5xl max-w-4xl mx-auto mb-12">
                     <h2 className="text-3xl font-bold text-center mb-6">Essential Nutrition Tips</h2>
                     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                         <div className="p-6 bg-white shadow rounded-xl flex flex-col items-center">
@@ -290,7 +290,7 @@ function DietPlans() {
                 </div>
 
                 {/* Disclaimer */}
-                <div className="max-w-4xl mx-auto bg-amber-50 border border-amber-200 p-6 rounded-lg text-sm text-gray-700">
+                <div className="max-w-8xl lg:max-w-7xl md:max-w-6xl sm:max-w-5xl max-w-4xl mx-auto bg-amber-50 border border-amber-200 p-6 rounded-lg text-sm text-gray-700">
                     <strong>Important:</strong> These diet plans are general recommendations. Please consult a healthcare professional before making changes to your diet, especially if you have health conditions or dietary restrictions.
                 </div>
 

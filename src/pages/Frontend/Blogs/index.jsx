@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import axios from "axios";
 
 export default function Blogs() {
     const [blogs, setBlogs] = useState([]);
@@ -7,9 +8,9 @@ export default function Blogs() {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const res = await fetch("/api/blogs"); // backend endpoint
-                const data = await res.json();
-                setBlogs(data);
+                const res = await axios.get("http://localhost:8000/blog/blogs"); // backend endpoint
+                const data = await res.data;
+                setBlogs(Array.isArray(data.blogs) ? data.blogs : []);
             } catch (err) {
                 console.error(err);
             } finally {

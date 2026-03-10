@@ -3,6 +3,7 @@ import { message } from "antd";
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useAuthContext } from "../../../contexts/Auth/AuthContext";
 
 const initialState = {
   name: "",
@@ -13,8 +14,9 @@ const initialState = {
   imagePreview: "",
 };
 
-export default function Signup() {
+function Signup() {
   const [state, setState] = useState(initialState);
+  const { handleRegister } = useAuthContext();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
   const { name, email, password, confirmPassword, profileImage, imagePreview } = state;
@@ -45,18 +47,23 @@ export default function Signup() {
 
     try {
       setLoading(true);
+
       const formData = new FormData();
       formData.append("name", name);
       formData.append("email", email);
       formData.append("password", password);
       if (profileImage) formData.append("image", profileImage);
 
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/users/register`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-      });
+      const res = await axios.post(
+        "http://localhost:8000/users/register",
+        formData,
+        {
+          headers: { "Content-Type": "multipart/form-data" },
+        }
+      );
 
       if (res.data.token) {
-        localStorage.setItem("authToken", res.data.token);
+        handleRegister(res.data.user, res.data.token);
         message.success("Registration successful");
         navigate("/dashboard");
       } else {
@@ -65,7 +72,8 @@ export default function Signup() {
     } catch (err) {
       console.error(err);
       message.error(err.response?.data?.message || "Something went wrong");
-    } finally {
+    }
+    finally {
       setLoading(false);
     }
   };
@@ -172,3 +180,4 @@ export default function Signup() {
     </div>
   );
 }
+export default Signup;
