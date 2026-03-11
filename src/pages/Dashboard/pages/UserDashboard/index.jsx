@@ -610,60 +610,56 @@ function UserDashboard() {
             <div className="container mx-auto px-4">
 
                 {/* HEADER (UNCHANGED) */}
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
+                <div className="flex justify-between items-center my-10">
 
-                    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
-
+                    <div className="">
                         <div
                             onClick={() => setIsEditing(true)}
-                            className="w-16 h-16 rounded-full bg-linear-to-br from-emerald-600 to-blue-600 flex items-center justify-center overflow-hidden cursor-pointer"
+                            className="w-22 h-22 rounded-full bg-linear-to-br from-emerald-600 to-blue-600 flex items-center justify-center overflow-hidden cursor-pointer"
                         >
                             {preview ? (
                                 <img
                                     src={preview}
                                     alt={user.name}
-                                    className="w-full h-full object-cover"
+                                    className="w-full h-full mx-auto object-cover"
                                 />
                             ) : (
                                 <User className="size-8 text-white" />
                             )}
                         </div>
-
-                        <div>
-
-                            <h1 className="text-xl sm:text-xl lg:text-2xl font-bold">
-                                Welcome back, {user.name}
-                            </h1>
-
+                        <h1 className="text-2xl font-bold">
+                            <span className=" md:text-2xl text-lg">
+                                Welcome back, {" "}
+                            </span>
+                            <br className="md:hidden" />
+                            {user.name}
+                        </h1>
+                        <Button
+                            onClick={() => setIsEditing(true)}
+                            className="mt-2! text-md! flex! items-center! gap-2! bg-blue-600! hover:bg-blue-700!"
+                        >
+                            <Edit className="size-4" />
+                            Edit Profile
+                        </Button>
+                    </div>
+                    <div className="">
+                        <div className="">
+                            <Link to="/bmi">
+                                <Button className="flex items-center gap-2 my-2">
+                                    <Calculator className="size-4" />
+                                    New BMI
+                                </Button>
+                            </Link>
                             <Button
-                                onClick={() => setIsEditing(true)}
-                                className="mt-2! text-md! flex! items-center! gap-2! bg-blue-600! hover:bg-blue-700!"
+                                variant="outline"
+                                onClick={handleUserLogout}
+                                className="flex items-center gap-2"
                             >
-                                <Edit className="size-4" />
-                                Edit Profile
+                                <LogOut className="size-4" />
+                                Logout
                             </Button>
 
                         </div>
-                    </div>
-
-                    <div className="flex gap-3">
-
-                        <Link to="/bmi">
-                            <Button className="flex items-center gap-2">
-                                <Calculator className="size-4" />
-                                New BMI
-                            </Button>
-                        </Link>
-
-                        <Button
-                            variant="outline"
-                            onClick={handleUserLogout}
-                            className="flex items-center gap-2"
-                        >
-                            <LogOut className="size-4" />
-                            Logout
-                        </Button>
-
                     </div>
                 </div>
 
@@ -744,7 +740,7 @@ function UserDashboard() {
                 {/* CHART */}
 
                 <Card className="mb-10">
-                    <h3 className="text-lg font-semibold mb-4">BMI Progress Chart</h3>
+                    <h3 className="text-lg font-semibold mb-4">BMI  ess Chart</h3>
 
                     <div className="h-[320px]">
                         <ResponsiveContainer width="100%" height="100%">

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { MenuOutlined } from "@ant-design/icons";
 import { FaHeartbeat } from "react-icons/fa";
-import { NavLink, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/Auth/AuthContext";
 import { MdOutlineLogin, MdOutlineLogout } from "react-icons/md";
 import { GiForkKnifeSpoon } from "react-icons/gi";
@@ -12,6 +12,7 @@ const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
   const navigate = useNavigate();
   const { isAuth, handleLogout, user } = useAuthContext();
+  const location = useLocation();
 
 
   const navLinkStyle = ({ isActive }) =>
@@ -76,7 +77,24 @@ const Navbar = () => {
               </NavLink>
             </li>
           )} */}
-
+          {location.pathname !== "/dashboard" && <div className="">
+            {isAuth ? (
+              <li>
+                <NavLink to="/auth/login" className={navLinkStyle}>
+                  <MdOutlineLogout />
+                  Logout
+                </NavLink>
+              </li>
+            ) : (
+              <li>
+                <NavLink to="/auth/login" className={navLinkStyle}>
+                  <MdOutlineLogin />
+                  Login
+                </NavLink>
+              </li>
+            )}
+          </div>
+          }
         </ul>
 
         {/* Mobile Icon */}
@@ -128,6 +146,17 @@ const Navbar = () => {
               Admin
             </NavLink>
           )} */}
+          {isAuth ? (
+            <NavLink to="/auth/login" className={navLinkStyle}>
+              <MdOutlineLogout />
+              Logout
+            </NavLink>
+          ) : (
+            <NavLink to="/auth/login" className={navLinkStyle}>
+              <MdOutlineLogin />
+              Login
+            </NavLink>
+          )}
 
         </ul>
       </div>
