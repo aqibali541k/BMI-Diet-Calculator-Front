@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import weight from "../../../assets/Images/weight.jpg";
 import { message } from "antd";
 import axios from "axios";
+import { LuCalculator } from "react-icons/lu";
 
 const initialState = {
     height: "",
@@ -85,7 +86,7 @@ const Calculator = () => {
                 <div className="grid lg:grid-cols-2 gap-8">
                     <div className="bg-white rounded-2xl shadow-md border border-gray-100 p-8">
                         <h2 className="text-lg font-semibold mb-6 flex items-center gap-2">
-                            📟 Enter Your Details
+                            <LuCalculator className="text-emerald-600" /> Enter Your Details
                         </h2>
 
                         <form onSubmit={handleSubmit} className="space-y-6">
@@ -100,7 +101,7 @@ const Calculator = () => {
                                         Metric (cm, kg)
                                     </label>
 
-                                    <label className="flex items-center gap-2 text-gray-500">
+                                    <label className="flex items-center gap-2 text-gray-500 cursor-not-allowed">
                                         <input type="radio" disabled />
                                         Imperial (inches, lbs)
                                     </label>
@@ -116,8 +117,8 @@ const Calculator = () => {
                                     name="height"
                                     value={height}
                                     onChange={handleChange}
-                                    placeholder="170"
-                                    className="w-full bg-gray-100 p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500"
+                                    placeholder="e.g.,170"
+                                    className="w-full bg-gray-100 p-2 rounded-lg outline-none focus:ring-2 focus:ring-gray-500 focus:shadow-sm focus:shadow-gray-700 focus:transition-all duration-400 ease-in-out"
                                 />
                             </div>
 
@@ -130,15 +131,15 @@ const Calculator = () => {
                                     name="weightKg"
                                     value={weightKg}
                                     onChange={handleChange}
-                                    placeholder="70"
-                                    className="w-full bg-gray-100 p-3 rounded-lg outline-none focus:ring-2 focus:ring-emerald-500"
+                                    placeholder="e.g.,70"
+                                    className="w-full bg-gray-100 p-2 rounded-lg outline-none focus:ring-2 focus:ring-gray-500 focus:shadow-sm focus:shadow-gray-700 focus:transition-all duration-400 ease-in-out"
                                 />
                             </div>
 
                             {/* Button */}
                             <button
                                 type="submit"
-                                className="w-full bg-emerald-600 text-white py-3 rounded-lg font-semibold hover:bg-emerald-700 transition"
+                                className="w-full bg-emerald-600 text-white py-2 cursor-pointer rounded-lg font-semibold hover:bg-emerald-700 transition"
                             >
                                 Calculate BMI
                             </button>
@@ -234,9 +235,14 @@ const Calculator = () => {
 
                             </div>
                         ) : (
-                            <p className="text-gray-500 text-center mt-20">
-                                Enter your height and weight to calculate your BMI
-                            </p>
+                            <>
+                                <p className="text-gray-500 mt-12 text-6xl lg:text-8xl flex justify-center">
+                                    <LuCalculator />
+                                </p>
+                                <p className="text-gray-500 text-center mt-20">
+                                    Enter your height and weight to calculate your BMI
+                                </p>
+                            </>
                         )}
 
                     </div>

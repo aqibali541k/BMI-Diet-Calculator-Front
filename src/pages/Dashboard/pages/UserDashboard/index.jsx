@@ -469,6 +469,7 @@ import {
 } from "lucide-react";
 
 import { message } from "antd";
+import { FaEdit } from "react-icons/fa";
 
 /* ---------- UI COMPONENTS ---------- */
 const Card = ({ children, className = "" }) => (
@@ -609,48 +610,60 @@ function UserDashboard() {
             <div className="container mx-auto px-4">
 
                 {/* HEADER (UNCHANGED) */}
+                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6 mb-10">
 
-                <div className="flex justify-between items-center mb-10">
-                    <div className="flex items-center gap-4">
+                    <div className="flex flex-col sm:flex-row items-center sm:items-start gap-4">
+
                         <div
-                            className="w-16 h-16 rounded-full bg-linear-to-br from-emerald-600 to-blue-600 flex items-center justify-center overflow-hidden cursor-pointer"
                             onClick={() => setIsEditing(true)}
+                            className="w-16 h-16 rounded-full bg-linear-to-br from-emerald-600 to-blue-600 flex items-center justify-center overflow-hidden cursor-pointer"
                         >
                             {preview ? (
-                                <img src={preview} alt={user.name} className="w-full h-full object-cover" />
+                                <img
+                                    src={preview}
+                                    alt={user.name}
+                                    className="w-full h-full object-cover"
+                                />
                             ) : (
                                 <User className="size-8 text-white" />
                             )}
                         </div>
 
                         <div>
-                            <h1 className="text-4xl font-bold">Welcome back, {user.name}!</h1>
-                            <p className="text-slate-500">
-                                Track your health journey and progress
-                            </p>
+
+                            <h1 className="text-xl sm:text-xl lg:text-2xl font-bold">
+                                Welcome back, {user.name}
+                            </h1>
 
                             <Button
-                                className="mt-2 bg-blue-600 hover:bg-blue-700 flex items-center gap-2"
                                 onClick={() => setIsEditing(true)}
+                                className="mt-2! text-md! flex! items-center! gap-2! bg-blue-600! hover:bg-blue-700!"
                             >
-                                <User className="size-4" />
+                                <Edit className="size-4" />
                                 Edit Profile
                             </Button>
+
                         </div>
                     </div>
 
                     <div className="flex gap-3">
+
                         <Link to="/bmi">
-                            <Button>
-                                <Calculator className="size-4 mr-2 inline" />
-                                New BMI Entry
+                            <Button className="flex items-center gap-2">
+                                <Calculator className="size-4" />
+                                New BMI
                             </Button>
                         </Link>
 
-                        <Button variant="outline" onClick={handleUserLogout}>
-                            <LogOut className="size-4 mr-2 inline" />
+                        <Button
+                            variant="outline"
+                            onClick={handleUserLogout}
+                            className="flex items-center gap-2"
+                        >
+                            <LogOut className="size-4" />
                             Logout
                         </Button>
+
                     </div>
                 </div>
 
@@ -820,6 +833,103 @@ function UserDashboard() {
                             </table>
                         </div>
                     </Card>
+                )}
+                {isEditing && (
+
+                    <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4">
+
+                        <div className="bg-white w-full max-w-md rounded-2xl shadow-2xl p-6 sm:p-8 relative">
+
+                            {/* TITLE */}
+
+                            <h2 className="text-xl sm:text-2xl font-bold text-center mb-6">
+                                Update Profile
+                            </h2>
+
+                            {/* PROFILE IMAGE */}
+
+                            <div className="flex justify-center mb-6">
+
+                                <div className="relative w-28 h-28">
+
+                                    <div className="w-28 h-28 rounded-full overflow-hidden border-4 border-gray-100 shadow-md">
+
+                                        {preview ? (
+                                            <img
+                                                src={preview}
+                                                alt="profile"
+                                                className="w-full h-full object-cover"
+                                            />
+                                        ) : (
+                                            <div className="w-full h-full flex items-center justify-center bg-gray-100">
+                                                <User className="size-10 text-gray-400" />
+                                            </div>
+                                        )}
+
+                                    </div>
+
+                                    {/* EDIT ICON */}
+
+                                    <label className="absolute bottom-1 right-1 bg-blue-600 hover:bg-blue-700 text-white p-2 rounded-full cursor-pointer shadow-lg transition">
+
+                                        <FaEdit className="text-xs sm:text-sm" />
+
+                                        <input
+                                            type="file"
+                                            hidden
+                                            onChange={handleImageChange}
+                                        />
+
+                                    </label>
+
+                                </div>
+
+                            </div>
+
+                            {/* NAME INPUT */}
+
+                            <div className="mb-6">
+
+                                <label className="text-sm text-gray-500 block mb-1">
+                                    Full Name
+                                </label>
+
+                                <input
+                                    type="text"
+                                    value={newName}
+                                    onChange={(e) => setNewName(e.target.value)}
+                                    placeholder="Enter your name"
+                                    className="w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-emerald-500"
+                                />
+
+                            </div>
+
+                            {/* BUTTONS */}
+
+                            <div className="flex flex-col sm:flex-row gap-3 sm:justify-end">
+
+                                <Button
+                                    variant="outline"
+                                    onClick={() => setIsEditing(false)}
+                                    className="w-full sm:w-auto"
+                                >
+                                    Cancel
+                                </Button>
+
+                                <Button
+                                    onClick={handleProfileUpdate}
+                                    disabled={loading}
+                                    className="w-full sm:w-auto"
+                                >
+                                    {loading ? "Updating..." : "Save Changes"}
+                                </Button>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
                 )}
 
             </div>

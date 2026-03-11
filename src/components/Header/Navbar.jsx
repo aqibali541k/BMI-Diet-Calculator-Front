@@ -79,27 +79,6 @@ const Navbar = () => {
 
         </ul>
 
-        {/* Login / Logout */}
-        <div className="hidden md:block">
-          {isAuth ? (
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 text-md font-semibold px-4 py-2 rounded-lg cursor-pointer"
-            >
-              <MdOutlineLogout className="font-semibold! text-md!" />
-              Logout
-            </button>
-          ) : (
-            <button
-              onClick={() => navigate("/auth/login")}
-              className="flex items-center gap-2 text-md font-semibold px-4 py-2 rounded-lg cursor-pointer"
-            >
-              <MdOutlineLogin className="font-semibold! text-md!" />
-              Login
-            </button>
-          )}
-        </div>
-
         {/* Mobile Icon */}
         <div className="text-2xl md:hidden">
           <MenuOutlined
@@ -111,7 +90,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-white shadow transition-all duration-300 ${showMenu ? "max-h-60 p-4" : "max-h-0 overflow-hidden"
+        className={`md:hidden bg-white shadow transition-all duration-300 ${showMenu ? "max-h-96 p-4" : "max-h-0 overflow-hidden"
           }`}
       >
         <ul className="flex flex-col gap-4 font-semibold">
@@ -150,23 +129,6 @@ const Navbar = () => {
             </NavLink>
           )} */}
 
-          {isAuth ? (
-            <button
-              onClick={handleLogout}
-              className="flex items-center gap-2 text-md font-semibold px-4 py-2 rounded-lg cursor-pointer"
-            >
-              <MdOutlineLogout className="font-semibold! text-md!" />
-              Logout
-            </button>
-          ) : (
-            <button
-              onClick={() => navigate("/auth/login")}
-              className="flex items-center gap-2 text-md font-semibold px-4 py-2 rounded-lg cursor-pointer"
-            >
-              <MdOutlineLogin className="font-semibold! text-md!" />
-              Login
-            </button>
-          )}
         </ul>
       </div>
     </header>

@@ -4,8 +4,6 @@ import { Navigate } from "react-router-dom";
 
 const AuthRoutes = ({ Component }) => {
   const { isAuth } = useAuthContext();
-  // return <Component />;
-  // return <Navigate to="/dashboard" />;
   if (isAuth) {
     return <Component />;
   } else {
