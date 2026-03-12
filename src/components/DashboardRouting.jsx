@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate } from "react-router-dom";
 import { useAuthContext } from "../contexts/Auth/AuthContext";
+import Navbar from "./Header/Navbar";
 
 const DashboardRouting = ({ Component }) => {
   const { isAuth } = useAuthContext();
@@ -8,6 +9,7 @@ const DashboardRouting = ({ Component }) => {
 
   return (
     <>
+      <Navbar />
       <Component />
     </>
   );

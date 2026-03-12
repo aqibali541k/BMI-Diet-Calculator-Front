@@ -1,12 +1,13 @@
 import React, { useState } from "react";
 import { MenuOutlined } from "@ant-design/icons";
-import { FaHeartbeat } from "react-icons/fa";
+import { FaBook, FaHeartbeat } from "react-icons/fa";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useAuthContext } from "../../contexts/Auth/AuthContext";
 import { MdOutlineLogin, MdOutlineLogout } from "react-icons/md";
 import { GiForkKnifeSpoon } from "react-icons/gi";
 import { LuCalculator, LuLayoutDashboard } from "react-icons/lu";
 import { IoHomeOutline } from "react-icons/io5";
+import { BookAlertIcon } from "lucide-react";
 
 const Navbar = () => {
   const [showMenu, setShowMenu] = useState(false);
@@ -55,7 +56,7 @@ const Navbar = () => {
           </li>
           <li>
             <NavLink to="/blogs" className={navLinkStyle}>
-              <GiForkKnifeSpoon />
+              <FaBook />
               Blogs
             </NavLink>
           </li>
