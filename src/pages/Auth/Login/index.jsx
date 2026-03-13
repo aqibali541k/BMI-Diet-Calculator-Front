@@ -6,7 +6,7 @@ import { useAuthContext } from "../../../contexts/Auth/AuthContext";
 
 function Login() {
   const navigate = useNavigate();
-  const { handleLogin } = useAuthContext();
+  const { handleLogin, user } = useAuthContext();
 
 
   // Single state object
@@ -43,6 +43,7 @@ function Login() {
       if (res.data.token) {
         handleLogin(res.data.user, res.data.token);
         message.success("Login successful");
+        console.log(res.data);
         navigate("/dashboard");
       } else {
         message.error(res.data.message || "Invalid email or password");

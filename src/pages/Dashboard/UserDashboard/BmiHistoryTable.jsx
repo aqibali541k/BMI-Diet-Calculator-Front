@@ -42,12 +42,12 @@ const BmiHistoryTable = ({ history = [] }) => {
                     {/* HEADER */}
 
                     <thead className="bg-gray-50 sticky top-0">
-                        <tr className="text-gray-500 text-xs sm:text-sm border-b">
-                            <th className="py-3 px-3 sm:px-4 font-medium">Date</th>
-                            <th className="py-3 px-3 sm:px-4 font-medium">Height</th>
-                            <th className="py-3 px-3 sm:px-4 font-medium">Weight</th>
-                            <th className="py-3 px-3 sm:px-4 font-medium">BMI</th>
-                            <th className="py-3 px-3 sm:px-4 font-medium">Category</th>
+                        <tr className="text-xs sm:text-sm border-b">
+                            <th className="py-3 px-3 sm:px-4 text-lg font-bold">Date</th>
+                            <th className="py-3 px-3 sm:px-4 text-lg font-bold">Height</th>
+                            <th className="py-3 px-3 sm:px-4 text-lg font-bold">Weight</th>
+                            <th className="py-3 px-3 sm:px-4 text-lg font-bold">BMI</th>
+                            <th className="py-3 px-3 sm:px-4 text-lg font-bold">Category</th>
                         </tr>
                     </thead>
 

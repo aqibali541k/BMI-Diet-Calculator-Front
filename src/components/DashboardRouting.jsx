@@ -4,8 +4,12 @@ import { useAuthContext } from "../contexts/Auth/AuthContext";
 import Navbar from "./Header/Navbar";
 
 const DashboardRouting = ({ Component }) => {
+
   const { isAuth } = useAuthContext();
-  if (!isAuth) return <Navigate to="/auth/login" />;
+
+  if (!isAuth) {
+    return <Navigate to="/auth/login" />;
+  }
 
   return (
     <>

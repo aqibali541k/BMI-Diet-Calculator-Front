@@ -60,28 +60,26 @@ const Navbar = () => {
               Blogs
             </NavLink>
           </li>
-
           {isAuth && (
             <li>
-              <NavLink to="/dashboard" className={navLinkStyle}>
+              <NavLink to="/dashboard/user" className={navLinkStyle}>
                 <LuLayoutDashboard />
                 Dashboard
               </NavLink>
             </li>
           )}
-
-          {/* {isAuth && user.role === "admin" && (
+          {isAuth && user.role === "admin" && (
             <li>
-              <NavLink to="/dashboard" className={navLinkStyle}>
+              <NavLink to="/dashboard/admin" className={navLinkStyle}>
                 <LuLayoutDashboard />
                 Admin
               </NavLink>
             </li>
-          )} */}
-          {location.pathname !== "/dashboard" && <div className="">
+          )}
+          {location.pathname !== "/dashboard/user" && location.pathname !== "/dashboard/admin" && <div className="">
             {isAuth ? (
               <li>
-                <NavLink to="/auth/login" className={navLinkStyle}>
+                <NavLink to="/auth/login" onClick={handleLogout} className={navLinkStyle}>
                   <MdOutlineLogout />
                   Logout
                 </NavLink>
