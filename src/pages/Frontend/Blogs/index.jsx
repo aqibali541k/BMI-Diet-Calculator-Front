@@ -1,17 +1,32 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { message } from "antd";
+import { useAuthContext } from "../../../contexts/Auth/AuthContext";
 
 export default function Blogs() {
     const [blogs, setBlogs] = useState([]);
     const [loading, setLoading] = useState(true);
+    const { token } = useAuthContext();
 
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const res = await axios.get("http://localhost:8000/blog/blogs"); // backend endpoint
-                const data = await res.data;
-                setBlogs(Array.isArray(data.blogs) ? data.blogs : []);
+
+                const res = await axios.get(
+                    "http://localhost:8000/blogs/all-blogs",
+                    {
+                        headers: {
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
+
+                const data = res.data;
+
+                setBlogs(Array.isArray(data) ? data : []);
+
             } catch (err) {
+                message.error("Failed to fetch blogs");
                 console.error(err);
             } finally {
                 setLoading(false);

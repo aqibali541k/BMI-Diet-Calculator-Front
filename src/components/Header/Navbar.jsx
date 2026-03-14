@@ -133,19 +133,19 @@ const Navbar = () => {
           </NavLink>
 
           {isAuth && (
-            <NavLink to="/dashboard" className={navLinkStyle}>
+            <NavLink to="/dashboard/user" className={navLinkStyle}>
               <LuLayoutDashboard />
               Dashboard
             </NavLink>
           )}
 
-          {/* {isAuth && user.role === "admin" && (
-            <NavLink to="/admin-dashboard" className={navLinkStyle}>
+          {isAuth && user.role === "admin" && (
+            <NavLink to="/dashboard/admin" className={navLinkStyle}>
               <LuLayoutDashboard />
               Admin
             </NavLink>
-          )} */}
-          {isAuth ? (
+          )}
+          {isAuth ? location.pathname !== "/dashboard/admin" && location.pathname !== "/dashboard/user" && (
             <NavLink to="/auth/login" className={navLinkStyle}>
               <MdOutlineLogout />
               Logout
