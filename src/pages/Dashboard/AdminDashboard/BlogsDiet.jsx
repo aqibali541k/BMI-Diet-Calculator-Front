@@ -6,7 +6,6 @@ import axios from "axios";
 import { useAuthContext } from "../../../contexts/Auth/AuthContext";
 
 const BlogsDiet = () => {
-    const [dietPlans, setDietPlans] = useState([]);
     const [blogs, setBlogs] = useState([]);
     const [deleteLoading, setDeleteLoading] = useState(null);
     const [editLoading, setEditLoading] = useState(null);
@@ -52,7 +51,7 @@ const BlogsDiet = () => {
     };
 
     return (
-        <div className="grid grid-cols-1 w-[90%] mx-auto md:grid-cols-1 gap-6 mb-8">
+        <div className="grid grid-cols-1 max-w-[95%] mx-auto md:grid-cols-1 gap-6 mb-8">
             {/* Blog Card */}
             <Card className="shadow-lg rounded-2xl">
                 <div className="flex flex-col gap-4">

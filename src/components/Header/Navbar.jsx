@@ -26,7 +26,7 @@ const Navbar = () => {
       <div className="max-w-7xl mx-auto flex items-center justify-between p-4">
 
         {/* Logo */}
-        <div className="text-2xl font-bold flex items-center gap-2 text-green-600">
+        <div onClick={() => navigate("/")} className="text-2xl font-bold flex items-center gap-2 text-green-600 cursor-pointer!">
           <FaHeartbeat />
           FitLife
         </div>
@@ -107,7 +107,7 @@ const Navbar = () => {
 
       {/* Mobile Menu */}
       <div
-        className={`md:hidden bg-white shadow transition-all duration-300 ${showMenu ? "max-h-96 p-4" : "max-h-0 overflow-hidden"
+        className={`md:hidden bg-white shadow transition-all duration-300 ${showMenu ? "max-h-110 p-4" : "max-h-0 overflow-hidden"
           }`}
       >
         <ul className="flex flex-col gap-4 font-semibold">
@@ -128,7 +128,7 @@ const Navbar = () => {
           </NavLink>
 
           <NavLink to="/blogs" className={navLinkStyle}>
-            <GiForkKnifeSpoon />
+            <FaBook />
             Blogs
           </NavLink>
 

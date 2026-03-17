@@ -10,6 +10,8 @@ const Admin = () => {
         <>
             <Routes>
                 <Route path="/blogs-new" element={<Blogs />} />
+                <Route path="/blogs-new/:id" element={<Blogs />} />
+
                 <Route path="/diet-new" element={<DietPlans />} />
             </Routes>
         </>

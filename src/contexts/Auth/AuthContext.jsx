@@ -1,6 +1,7 @@
 import React, { useEffect, useState, createContext, useContext } from "react";
 import axios from "axios";
 import { Loading3QuartersOutlined } from "@ant-design/icons";
+import { message } from "antd";
 
 const AuthContext = createContext();
 
@@ -59,7 +60,7 @@ export const AuthProvider = ({ children }) => {
         token,
       });
     } catch (error) {
-      console.log("User not authenticated");
+      message.error("Failed to fetch user profile");
       setState({ isAuth: false, user: null, role: "", token: "" });
     } finally {
       setLoading(false);

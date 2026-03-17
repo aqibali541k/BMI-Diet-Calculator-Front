@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useAuthContext } from "../../../../contexts/Auth/AuthContext";
 import axios from "axios";
-import { message, Button } from "antd";
+import { message, Button, Spin } from "antd";
 import { useParams, useNavigate } from "react-router-dom";
 
 const initialState = { author: "", title: "", content: "", image: "" };
@@ -16,6 +16,7 @@ const Blogs = () => {
 
     // ---------------- FETCH BLOG IF EDIT ----------------
     useEffect(() => {
+
         if (id && token) {
             const fetchBlog = async () => {
                 try {
@@ -23,6 +24,7 @@ const Blogs = () => {
                         `http://localhost:8000/blogs/single-blog/${id}`,
                         { headers: { Authorization: `Bearer ${token}` } }
                     );
+                    console.log("API RESPONSE:", res.data);
                     const blog = res.data;
                     setBlogData({
                         author: blog.author || "",
@@ -74,6 +76,7 @@ const Blogs = () => {
                     { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } }
                 );
                 message.success("Blog updated successfully");
+                navigate("/dashboard/admin");
             } else {
                 await axios.post(
                     "http://localhost:8000/blogs/create-blogs",
@@ -93,14 +96,13 @@ const Blogs = () => {
             setLoading(false);
         }
     };
-
     return (
         <div className="min-h-screen bg-purple-50 flex justify-center items-center p-6">
             <div className="bg-white w-full max-w-3xl rounded-2xl shadow-lg p-8">
                 <h2 className="text-2xl font-semibold mb-6">
                     {id ? "Edit Blog Post" : "Create New Blog Post"}
                 </h2>
-                <form className="space-y-6">
+                <form className="space-y-6" onSubmit={handleSubmit}>
                     <div>
                         <label className="block mb-2 font-medium"><span className="text-red-500">* </span>Featured Image</label>
                         <input type="file" name="image" onChange={handleChange} className="w-[50%] border-gray-200 border p-2 cursor-pointer rounded-xl" />
@@ -123,10 +125,15 @@ const Blogs = () => {
                     </div>
 
                     <div className="flex gap-4">
-                        <button type="submit" loading={loading} onClick={handleSubmit} className="flex-1 cursor-pointer bg-emerald-600 text-white py-2 rounded-2xl">
+                        <Button
+                            type="primary"
+                            htmlType="submit"
+                            loading={loading} // spinner automatically dikhega
+                            className="flex-1! cursor-pointer! bg-emerald-600! text-white! py-2! rounded-3xl!"
+                        >
                             {id ? "Update Blog" : "Create Blog"}
-                        </button>
-                        <button type="button" className="flex-1 cursor-pointer bg-red-600 text-white py-2 rounded-2xl" onClick={() => navigate("/admin/blogs")}>
+                        </Button>
+                        <button type="button" className="flex-1 cursor-pointer bg-red-600 text-white py-1 rounded-3xl" onClick={() => navigate("/dashboard/admin")}>
                             Cancel
                         </button>
                     </div>

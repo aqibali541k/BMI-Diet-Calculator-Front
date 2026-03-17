@@ -24,3 +24,18 @@
 .animate-fadeIn {
     animation: fadeIn 0.5s ease forwards;
 }
+
+/* Chrome, Edge, Safari */
+::-webkit-scrollbar {
+    display: none;
+}
+
+/* Firefox */
+html {
+    scrollbar-width: none;
+}
+
+/* IE, Edge (old) */
+body {
+    -ms-overflow-style: none;
+}

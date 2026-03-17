@@ -15,7 +15,7 @@ const Copyright = () => {
         <p className="mb-6">
           Join thousands of people who have transformed their lives with FitLife
         </p>
-        <button onClick={() => navigate("/bmi")} className="px-8 py-3 bg-green-600 text-white font-bold rounded-xl shadow-lg hover:bg-green-500 transition-all duration-300">
+        <button onClick={() => navigate("/bmi")} className="px-8 py-3 cursor-pointer! bg-green-600! text-white! font-bold! rounded-xl! shadow-lg! hover:bg-green-500! transition-all! duration-300!">
           Get Started Now
         </button>
       </div>
@@ -35,10 +35,10 @@ const Copyright = () => {
         <div>
           <h3 className="text-xl font-bold text-white mb-3">Quick Links</h3>
           <ul className="space-y-2 text-gray-300 text-sm">
-            <li><a href="#" className="hover:text-green-500 transition-colors">Home</a></li>
-            <li><a href="#" className="hover:text-green-500 transition-colors">BMI Calculator</a></li>
-            <li><a href="#" className="hover:text-green-500 transition-colors">Diet Plans</a></li>
-            <li><a href="#" className="hover:text-green-500 transition-colors">Resources</a></li>
+            <li><a onClick={() => navigate("/")} className="hover:text-green-500 cursor-pointer! transition-colors">Home</a></li>
+            <li><a onClick={() => navigate("/bmi")} className="hover:text-green-500 cursor-pointer! transition-colors">BMI Calculator</a></li>
+            <li><a onClick={() => navigate("/diet")} className="hover:text-green-500 cursor-pointer! transition-colors">Diet Plans</a></li>
+            <li><a onClick={() => navigate("/blogs")} className="hover:text-green-500 cursor-pointer! transition-colors">Blogs</a></li>
           </ul>
         </div>
 
@@ -46,9 +46,9 @@ const Copyright = () => {
         <div>
           <h3 className="text-xl font-bold text-white mb-3">Resources</h3>
           <ul className="space-y-2 text-gray-300 text-sm">
-            <li><a href="#" className="hover:text-green-500 transition-colors">Health Tips</a></li>
-            <li><a href="#" className="hover:text-green-500 transition-colors">Workout Plans</a></li>
-            <li><a href="#" className="hover:text-green-500 transition-colors">Nutrition Guide</a></li>
+            <li><a className="hover:text-green-500 transition-colors">Health Tips</a></li>
+            <li><a className="hover:text-green-500 transition-colors">Workout Plans</a></li>
+            <li><a className="hover:text-green-500 transition-colors">Nutrition Guide</a></li>
           </ul>
         </div>
 

@@ -210,13 +210,13 @@ function DietPlans() {
                     <div className="flex justify-center mb-6 gap-4 bg-gray-100 rounded-2xl p-0.5  ">
                         <button
                             onClick={() => setActiveTab("meals")}
-                            className={`flex-1 text-center py-1 rounded-2xl ${activeTab === "meals" ? "bg-white " : ""}`}
+                            className={`flex-1 text-center py-1 cursor-pointer rounded-2xl ${activeTab === "meals" ? "bg-white " : ""}`}
                         >
                             Daily Meals
                         </button>
                         <button
                             onClick={() => setActiveTab("benefits")}
-                            className={`flex-1 text-center py-1 rounded-2xl ${activeTab === "benefits" ? "bg-white" : ""}`}
+                            className={`flex-1 text-center py-1 cursor-pointer rounded-2xl ${activeTab === "benefits" ? "bg-white" : ""}`}
                         >
                             Benefits
                         </button>

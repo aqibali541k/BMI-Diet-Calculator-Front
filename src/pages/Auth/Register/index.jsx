@@ -18,6 +18,8 @@ function Signup() {
   const [state, setState] = useState(initialState);
   const { handleRegister } = useAuthContext();
   const [loading, setLoading] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+
   const navigate = useNavigate();
   const { name, email, password, confirmPassword, profileImage, imagePreview } = state;
 
@@ -139,26 +141,40 @@ function Signup() {
               onChange={handleChange}
               className="w-full px-4 py-2 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
             />
-
-            {/* Password */}
-            <input
-              type="password"
-              name="password"
-              placeholder="Password"
-              value={password}
-              onChange={handleChange}
-              className="w-full px-4 py-2 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
-            />
-
-            {/* Confirm Password */}
-            <input
-              type="password"
-              name="confirmPassword"
-              placeholder="Confirm Password"
-              value={confirmPassword}
-              onChange={handleChange}
-              className="w-full px-4 py-2 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
-            />
+            <div className="space-y-1 relative">
+              <label className="block text-sm font-medium">Password</label>
+              <input
+                type={showPassword ? "text" : "password"}
+                name="password"
+                placeholder="••••••"
+                value={password}
+                onChange={handleChange}
+                className="w-full px-4 py-2 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
+              />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-[38px] text-gray-500 cursor-pointer select-none"
+              >
+                {showPassword ? "🙈" : "👁️"}
+              </span>
+            </div>
+            <div className="space-y-1 relative">
+              <label className="block text-sm font-medium">Confirm Password</label>
+              <input
+                type={showPassword ? "text" : "password"}
+                name="confirmPassword"
+                placeholder="••••••"
+                value={confirmPassword}
+                onChange={handleChange}
+                className="w-full px-4 py-2 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
+              />
+              <span
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-[38px] text-gray-500 cursor-pointer select-none"
+              >
+                {showPassword ? "🙈" : "👁️"}
+              </span>
+            </div>
 
             <button
               type="submit"

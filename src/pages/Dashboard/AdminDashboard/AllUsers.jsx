@@ -18,7 +18,6 @@ const AllUsers = () => {
             );
 
             setUsers(res.data.users); // FIX
-            console.log(res.data.users);
 
         } catch (error) {
             console.error("Error fetching users:", error);
@@ -38,7 +37,6 @@ const AllUsers = () => {
             );
 
             setBlogs(res.data); // 
-            console.log(res.data);
 
         } catch (error) {
             console.error("Error fetching blogs:", error);
@@ -51,7 +49,7 @@ const AllUsers = () => {
     }, []);
 
     return (
-        <div className="grid md:grid-cols-4 gap-6 mb-10">
+        <div className="grid md:grid-cols-4 gap-4 mb-10 lg:px-8 sm:px-4">
 
             {/* Total Users */}
             <Card className="bg-blue-600! rounded-2xl!">

@@ -131,7 +131,7 @@ function AdminDashboard() {
 
                         <Link to="/dashboard/user" className="w-full sm:w-auto">
 
-                            <Button className="flex! items-center! justify-center! gap-2! border-none! bg-yellow-400! hover:bg-yellow-700! text-white! w-full!">
+                            <Button className="flex! items-center! justify-center! gap-2! border-none! bg-purple-600! hover:bg-purple-700! text-white! w-full!">
                                 <LuLayoutDashboard size={16} />
                                 My Dashboard
                             </Button>
@@ -140,7 +140,7 @@ function AdminDashboard() {
 
                         <Button
                             onClick={handleUserLogout}
-                            className="flex! items-center! justify-center! gap-2! bg-red-600! hover:bg-red-700! text-white! w-full! sm:w-auto!"
+                            className="flex! items-center! justify-center! gap-2! bg-red-500! border-none! hover:shadow-lg! hover:bg-red-600! text-white! w-full! sm:w-auto!"
                         >
                             <LogOut size={16} />
                             Logout

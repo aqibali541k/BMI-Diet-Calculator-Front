@@ -47,10 +47,11 @@ const Table = () => {
             setDeleteLoading(null);
         }
     };
+    const filteredUsers = users.filter((u) => u.role !== "admin");
 
     return (
-        <div className="min-h-screen bg-linear-to-br from-amber-50 to-emerald-100 py-12  px-4">
-            <div className="max-w-6xl mx-auto bg-white shadow-lg rounded-2xl overflow-hidden">
+        <div className="bg-linear-to-br from-amber-50 to-emerald-100 py-8  px-4">
+            <div className="max-w-[98%] mx-auto bg-white shadow-lg rounded-2xl overflow-hidden">
                 {/* Header */}
                 <div className="p-6 border-b border-amber-200">
                     <h2 className="text-3xl font-bold text-amber-800">All Users</h2>
@@ -88,7 +89,7 @@ const Table = () => {
                             </thead>
 
                             <tbody className="divide-y divide-amber-200">
-                                {users.map((user) => (
+                                {filteredUsers.map((user) => (
                                     <tr
                                         key={user._id}
                                         className="hover:bg-amber-100 transition"
