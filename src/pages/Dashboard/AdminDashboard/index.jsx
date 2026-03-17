@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { message, Button } from "antd";
+import { message, Button, } from "antd";
+import Users from "./pages/Users";
 import { Calculator, LogOut, User, Edit, ShieldCheck } from "lucide-react";
 
 import { useAuthContext } from "../../../contexts/Auth/AuthContext";
@@ -166,7 +167,7 @@ function AdminDashboard() {
 
                 {/* ---------------- TABLE ---------------- */}
 
-
+                <Users />
 
                 {/* ---------------- PROFILE MODAL ---------------- */}
 
