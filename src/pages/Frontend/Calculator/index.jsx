@@ -35,7 +35,7 @@ const Calculator = () => {
         try {
             const token = localStorage.getItem("authToken");
             if (!token) {
-                message.error("Please login first");
+                message.warning("Please login first to calculate BMI");
                 return;
             }
 

@@ -90,7 +90,7 @@ function Signup() {
         </div>
 
         <div className="bg-white rounded-xl shadow-xl p-6">
-          <h2 className="text-2xl font-semibold mb-2 text-center">Sign Up</h2>
+          <h2 className="text-2xl font-semibold mb-2 text-center text-emerald-600">Sign Up</h2>
           <p className="text-slate-500 text-center mb-6">Create a new account to track your BMI</p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
@@ -116,7 +116,7 @@ function Signup() {
                   name="profileImage"
                   accept="image/*"
                   onChange={handleChange}
-                  className="w-full px-1 py-2 bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
+                  className="w-full px-1 py-2 cursor-pointer bg-gray-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-emerald-600"
                 />
               </div>
               <p className="text-xs text-slate-500">Max size: 2MB</p>
@@ -170,7 +170,7 @@ function Signup() {
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-[38px] text-gray-500 cursor-pointer select-none"
+                className="absolute right-3 top-[38px] cursor-pointer select-none"
               >
                 {showPassword ? "🙈" : "👁️"}
               </span>
@@ -179,14 +179,14 @@ function Signup() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-lg font-semibold transition"
+              className="w-full bg-emerald-600 hover:bg-emerald-700 cursor-pointer text-white py-2 rounded-lg font-semibold transition"
             >
               {loading ? "Registering..." : "Create Account"}
             </button>
 
             <p className="text-center text-sm text-slate-600">
               Already have an account?{" "}
-              <Link to="/auth/login" className="text-emerald-600 font-semibold hover:underline">
+              <Link to="/auth/login" className="text-emerald-600 cursor-pointer font-semibold hover:underline">
                 Login
               </Link>
             </p>

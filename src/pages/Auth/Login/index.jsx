@@ -43,7 +43,6 @@ function Login() {
       if (res.data.token) {
         handleLogin(res.data.user, res.data.token);
         message.success("Login successful");
-        console.log(res.data);
         navigate("/dashboard");
       } else {
         message.error(res.data.message || "Invalid email or password");
@@ -108,15 +107,21 @@ function Login() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-lg font-semibold transition"
+              className="w-full bg-emerald-600 cursor-pointer hover:bg-emerald-700 text-white py-2 rounded-lg font-semibold transition"
             >
               {loading ? "Logging in..." : "Login"}
             </button>
-
+            {/* forgot-password */}
+            <p className="text-center text-sm text-slate-600">
+              Forgot your password?{" "}
+              <Link to="/auth/reset-password" className="text-emerald-600 cursor-pointer font-semibold hover:underline">
+                Reset Password
+              </Link>
+            </p>
             {/* Register link */}
             <p className="text-center text-sm text-slate-600">
               Don't have an account?{" "}
-              <Link to="/auth/register" className="text-emerald-600 font-semibold hover:underline">
+              <Link to="/auth/register" className="text-emerald-600 cursor-pointer font-semibold hover:underline">
                 Register
               </Link>
             </p>

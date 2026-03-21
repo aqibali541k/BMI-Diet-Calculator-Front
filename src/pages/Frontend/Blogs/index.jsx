@@ -24,8 +24,8 @@ export default function Blogs() {
                 setLoading(false);
             }
         };
-        if (token) fetchBlogs();
-    }, [token]);
+        fetchBlogs();
+    }, []);
 
     return (
         <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 py-16 px-4">
