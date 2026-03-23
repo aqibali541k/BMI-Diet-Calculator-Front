@@ -15,7 +15,7 @@ const BlogsDiet = () => {
 
     const fetchBlogs = async () => {
         try {
-            const res = await axios.get("http://localhost:8000/blogs/all-blogs", {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/blogs/all-blogs`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setBlogs(res.data || []);
@@ -32,7 +32,7 @@ const BlogsDiet = () => {
     const handleDelete = async (id) => {
         try {
             setDeleteLoading(id);
-            await axios.delete(`http://localhost:8000/blogs/delete-blog/${id}`, {
+            await axios.delete(`${import.meta.env.VITE_API_URL}/blogs/delete-blog/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             message.success("Blog deleted successfully");

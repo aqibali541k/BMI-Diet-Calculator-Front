@@ -49,7 +49,7 @@ export const AuthProvider = ({ children }) => {
       if (!token) throw new Error("No token found");
 
       const res = await axios.get(
-        "http://localhost:8000/users/profile",
+        `${import.meta.env.VITE_API_URL}/users/profile`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
 
@@ -78,7 +78,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("authToken");
       const res = await axios.put(
-        "http://localhost:8000/users/update",
+        `${import.meta.env.VITE_API_URL}/users/update`,
         formData,
         { headers: { Authorization: `Bearer ${token}` } }
       );
@@ -94,7 +94,7 @@ export const AuthProvider = ({ children }) => {
     try {
       const token = localStorage.getItem("authToken");
       const res = await axios.get(
-        "http://localhost:8000/bmi/history",
+        `${import.meta.env.VITE_API_URL}/bmi/history`,
         { headers: { Authorization: `Bearer ${token}` } }
       );
       return res.data || [];

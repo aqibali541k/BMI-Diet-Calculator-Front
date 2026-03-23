@@ -13,7 +13,7 @@ export default function Blogs() {
     useEffect(() => {
         const fetchBlogs = async () => {
             try {
-                const res = await axios.get("http://localhost:8000/blogs/all-blogs", {
+                const res = await axios.get(`${import.meta.env.VITE_API_URL}/blogs/all-blogs`, {
                     headers: { Authorization: `Bearer ${token}` },
                 });
                 setBlogs(Array.isArray(res.data) ? res.data : []);

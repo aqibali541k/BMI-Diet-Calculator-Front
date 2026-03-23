@@ -13,7 +13,7 @@ const AllUsers = () => {
         setLoading(true);
         try {
             const res = await axios.get(
-                "http://localhost:8000/users/all",
+                `${import.meta.env.VITE_API_URL}/users/all`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
 
@@ -32,7 +32,7 @@ const AllUsers = () => {
         setLoading(true);
         try {
             const res = await axios.get(
-                "http://localhost:8000/blogs/all-blogs",
+                `${import.meta.env.VITE_API_URL}/blogs/all-blogs`,
                 { headers: { Authorization: `Bearer ${token}` } }
             );
 

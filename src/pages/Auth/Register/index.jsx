@@ -57,7 +57,7 @@ function Signup() {
       if (profileImage) formData.append("image", profileImage);
 
       const res = await axios.post(
-        "http://localhost:8000/users/register",
+        `${import.meta.env.VITE_API_URL}/users/register`,
         formData,
         {
           headers: { "Content-Type": "multipart/form-data" },

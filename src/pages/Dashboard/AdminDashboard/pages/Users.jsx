@@ -13,7 +13,7 @@ const Table = () => {
     const fetchUsers = async () => {
         setLoading(true); // ✅ FIX
         try {
-            const res = await axios.get("http://localhost:8000/users/all", {
+            const res = await axios.get(`${import.meta.env.VITE_API_URL}/users/all`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
             setUsers(res.data.users || []);
@@ -32,7 +32,7 @@ const Table = () => {
     const handleDelete = async (id) => {
         try {
             setDeleteLoading(id);
-            await axios.delete(`http://localhost:8000/users/delete-user/${id}`, {
+            await axios.delete(`${import.meta.env.VITE_API_URL}/users/delete-user/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
             });
 

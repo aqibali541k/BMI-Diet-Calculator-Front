@@ -30,7 +30,7 @@ function ResetPassword() {
 
     try {
       setLoading(true);
-      const res = await axios.post("http://localhost:8000/users/forgot-password", {
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/users/forgot-password`, {
         email,
       });
 
@@ -81,7 +81,7 @@ function ResetPassword() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-2 rounded-lg font-semibold transition"
+              className="w-full bg-emerald-600 hover:bg-emerald-700 cursor-pointer text-white py-2 rounded-lg font-semibold transition"
             >
               {loading ? "Sending..." : "Send Reset Link"}
             </button>
@@ -89,7 +89,7 @@ function ResetPassword() {
             {/* Register link */}
             <p className="text-center text-sm text-slate-600">
               Already have an account?{" "}
-              <Link to="/auth/login" className="text-emerald-600 font-semibold hover:underline">
+              <Link to="/auth/login" className="text-emerald-600 cursor-pointer font-semibold hover:underline">
                 Login
               </Link>
             </p>

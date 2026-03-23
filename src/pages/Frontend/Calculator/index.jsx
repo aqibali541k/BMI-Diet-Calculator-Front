@@ -41,7 +41,7 @@ const Calculator = () => {
 
             // Correct payload: backend expects 'weight'
             const res = await axios.post(
-                "http://localhost:8000/bmi/create",
+                `${import.meta.env.VITE_API_URL}/bmi/create`,
                 {
                     height,
                     weight: weightKg, // map weightKg → weight
