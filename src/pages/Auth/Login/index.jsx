@@ -3,29 +3,30 @@ import { Link, useNavigate } from "react-router-dom";
 import { message } from "antd";
 import axios from "axios";
 import { useAuthContext } from "../../../contexts/Auth/AuthContext";
+import { GoogleLogin } from "@react-oauth/google";
 
 function Login() {
   const navigate = useNavigate();
-  const { handleLogin, user } = useAuthContext();
+  const { handleLogin } = useAuthContext();
 
-
-  // Single state object
+  // State
   const [state, setState] = useState({
     email: "",
     password: "",
   });
+
   const [showPassword, setShowPassword] = useState(false);
   const [loading, setLoading] = useState(false);
 
   const { email, password } = state;
 
-  // Handle input changes
+  // Handle input
   const handleChange = (e) => {
     const { name, value } = e.target;
     setState((prev) => ({ ...prev, [name]: value }));
   };
 
-  // Handle form submit
+  // 🔐 Normal Login
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -35,10 +36,11 @@ function Login() {
 
     try {
       setLoading(true);
-      const res = await axios.post(`${import.meta.env.VITE_API_URL}/users/login`, {
-        email,
-        password,
-      });
+
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/users/login`,
+        { email, password }
+      );
 
       if (res.data.token) {
         handleLogin(res.data.user, res.data.token);
@@ -49,7 +51,34 @@ function Login() {
       }
     } catch (err) {
       console.error(err);
-      message.error(err.response?.data?.message || "Server error, try again later");
+      message.error(
+        err.response?.data?.message || "Server error, try again later"
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // 🔵 Google Login
+  const handleGoogleLogin = async (credentialResponse) => {
+    try {
+      setLoading(true);
+
+      const res = await axios.post(
+        `${import.meta.env.VITE_API_URL}/users/google`,
+        {
+          token: credentialResponse.credential,
+        }
+      );
+
+      if (res.data.token) {
+        handleLogin(res.data.user, res.data.token);
+        message.success("Google login successful");
+        navigate("/dashboard");
+      }
+    } catch (err) {
+      console.log(err);
+      message.error("Google login failed");
     } finally {
       setLoading(false);
     }
@@ -58,17 +87,23 @@ function Login() {
   return (
     <div className="min-h-screen bg-linear-to-br from-emerald-50 to-blue-50 flex items-center justify-center py-12 px-4">
       <div className="w-full max-w-md">
-        {/* Hero / Header */}
+        {/* Header */}
         <div className="text-center mb-8">
-          <div className="text-emerald-600 text-4xl font-bold mb-2">FitLife</div>
+          <div className="text-emerald-600 text-4xl font-bold mb-2">
+            FitLife
+          </div>
           <h1 className="text-2xl font-bold mb-2">Welcome Back</h1>
-          <p className="text-slate-600">Login to track your health journey and manage your profile</p>
+          <p className="text-slate-600">
+            Login to track your health journey and manage your profile
+          </p>
         </div>
 
         {/* Card */}
         <div className="bg-white rounded-xl shadow-xl p-6">
           <h2 className="text-2xl font-semibold mb-2 text-center">Login</h2>
-          <p className="text-slate-500 text-center mb-6">Enter your credentials to access your account</p>
+          <p className="text-slate-500 text-center mb-6">
+            Enter your credentials to access your account
+          </p>
 
           <form onSubmit={handleSubmit} className="space-y-4">
             {/* Email */}
@@ -97,13 +132,13 @@ function Login() {
               />
               <span
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-[38px] text-gray-500 cursor-pointer select-none"
+                className="absolute right-3 top-[38px] text-gray-500 cursor-pointer"
               >
                 {showPassword ? "🙈" : "👁️"}
               </span>
             </div>
 
-            {/* Submit */}
+            {/* Login Button */}
             <button
               type="submit"
               disabled={loading}
@@ -111,17 +146,40 @@ function Login() {
             >
               {loading ? "Logging in..." : "Login"}
             </button>
-            {/* forgot-password */}
+
+            {/* Divider */}
+            <div className="flex items-center my-4">
+              <div className="flex-1 h-px bg-gray-300"></div>
+              <span className="px-2 text-gray-500 text-sm">OR</span>
+              <div className="flex-1 h-px bg-gray-300"></div>
+            </div>
+
+            {/* Google Login */}
+            <div className="flex justify-center">
+              <GoogleLogin
+                onSuccess={handleGoogleLogin}
+                onError={() => message.error("Google Login Failed")}
+              />
+            </div>
+
+            {/* Forgot Password */}
             <p className="text-center text-sm text-slate-600">
               Forgot your password?{" "}
-              <Link to="/auth/reset-password" className="text-emerald-600 cursor-pointer font-semibold hover:underline">
+              <Link
+                to="/auth/reset-password"
+                className="text-emerald-600 font-semibold hover:underline"
+              >
                 Reset Password
               </Link>
             </p>
-            {/* Register link */}
+
+            {/* Register */}
             <p className="text-center text-sm text-slate-600">
               Don't have an account?{" "}
-              <Link to="/auth/register" className="text-emerald-600 cursor-pointer font-semibold hover:underline">
+              <Link
+                to="/auth/register"
+                className="text-emerald-600 font-semibold hover:underline"
+              >
                 Register
               </Link>
             </p>
@@ -131,4 +189,5 @@ function Login() {
     </div>
   );
 }
+
 export default Login;
