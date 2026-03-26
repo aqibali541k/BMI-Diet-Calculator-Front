@@ -26,7 +26,7 @@ function Graph({ chartData }) {
                 </p>
 
                 <Link to="/bmi">
-                    <button className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-2 rounded-lg transition">
+                    <button className="bg-emerald-600 hover:bg-emerald-700 cursor-pointer text-white px-6 py-2 rounded-lg transition">
                         Calculate BMI Now
                     </button>
                 </Link>
