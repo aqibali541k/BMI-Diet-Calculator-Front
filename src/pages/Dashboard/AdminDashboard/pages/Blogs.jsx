@@ -94,6 +94,7 @@ const Blogs = () => {
                     formData,
                     { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } }
                 );
+                console.log(token)
                 setLoading(false);
                 message.success("Blog created successfully");
             }
