@@ -22,10 +22,9 @@ const Blogs = () => {
             const fetchBlog = async () => {
                 try {
                     const res = await axios.get(
-                        `http://localhost:8000/blogs/single-blog/${id}`,
+                        `${import.meta.env.VITE_API_URL}/blogs/single-blog/${id}`,
                         { headers: { Authorization: `Bearer ${token}` } }
                     );
-                    console.log("API RESPONSE:", res.data);
                     const blog = res.data;
                     setBlogData({
                         author: blog.author || "",
@@ -83,7 +82,7 @@ const Blogs = () => {
         try {
             if (id) {
                 await axios.put(
-                    `http://localhost:8000/blogs/update-blog/${id}`,
+                    `${import.meta.env.VITE_API_URL}/blogs/update-blog/${id}`,
                     formData,
                     { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } }
                 );
@@ -91,7 +90,7 @@ const Blogs = () => {
                 navigate("/dashboard/admin");
             } else {
                 await axios.post(
-                    "http://localhost:8000/blogs/create-blogs",
+                    `${import.meta.env.VITE_API_URL}/blogs/create-blogs`,
                     formData,
                     { headers: { Authorization: `Bearer ${token}`, "Content-Type": "multipart/form-data" } }
                 );
