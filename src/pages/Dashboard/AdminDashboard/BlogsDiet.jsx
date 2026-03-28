@@ -97,7 +97,10 @@ const BlogsDiet = () => {
                                                 danger
                                                 icon={<Trash2 size={14} />}
                                                 loading={deleteLoading === blog._id}
-                                                onClick={() => handleDelete(blog._id)}
+                                                onClick={() => {
+                                                    handleDelete(blog._id);
+                                                    fetchBlogs()
+                                                }}
                                                 className="bg-red-600! text-white!"
                                             />
                                         </div>

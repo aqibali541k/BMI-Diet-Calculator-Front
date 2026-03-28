@@ -146,7 +146,7 @@ const Navbar = () => {
             </NavLink>
           )}
           {isAuth ? location.pathname !== "/dashboard/admin" && location.pathname !== "/dashboard/user" && (
-            <NavLink to="/auth/login" className={navLinkStyle}>
+            <NavLink to="/auth/login" onClick={handleLogout} className={navLinkStyle}>
               <MdOutlineLogout />
               Logout
             </NavLink>
